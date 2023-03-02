@@ -5,7 +5,9 @@ from .models import Student
 
 
 def index(request):
-    return render(request, "index.html")
+    data = Student.objects.all()
+    context = {"data": data}
+    return render(request, "index.html", context)
 
 
 def edit(request):
@@ -29,5 +31,6 @@ def insertData(request):
 
         query = Student(name=name, email=email, age=age, gender=gender)
         query.save()
+        return redirect("/")
 
         return render(request, "index.html")
